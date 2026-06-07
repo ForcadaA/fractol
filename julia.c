@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/08 14:51:56 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/07 21:50:32 by aforcada         ###   ########.fr       */
+/*   Created: 2026/06/07 21:30:35 by aforcada          #+#    #+#             */
+/*   Updated: 2026/06/07 21:39:36 by aforcada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fractol.h"
 
-/**
- * @brief compares upto n characters of strings s1 and s2
- * @return the first char difference or 0
- */
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	julia(t_vec *v, const t_vec *vseed)
 {
-	size_t				i;
-	const unsigned char	*t1;
-	const unsigned char	*t2;
+	int		iter;
 
-	i = 0;
-	t1 = (unsigned char *)s1;
-	t2 = (unsigned char *)s2;
-	while (i < n && (t1[i] || t2[i]))
+	iter = 0;
+	while (vnorm2(v) <= 4 && iter++ < MAX_ITER)
 	{
-		if (t1[i] != t2[i])
-			return (t1[i] - t2[i]);
-		i++;
+		vsquare(v);
+		vadd(v, vseed);
 	}
-	return (0);
+	if (iter == MAX_ITER)
+		return (0);
+	return (iter);
 }

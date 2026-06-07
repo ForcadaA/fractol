@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/08 14:51:56 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/07 21:50:32 by aforcada         ###   ########.fr       */
+/*   Created: 2026/06/07 21:35:39 by aforcada          #+#    #+#             */
+/*   Updated: 2026/06/07 21:40:58 by aforcada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fractol.h"
 
-/**
- * @brief compares upto n characters of strings s1 and s2
- * @return the first char difference or 0
- */
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int		mandelbrot(t_vec *v)
 {
-	size_t				i;
-	const unsigned char	*t1;
-	const unsigned char	*t2;
+	t_vec	w;
+	int		iter;
 
-	i = 0;
-	t1 = (unsigned char *)s1;
-	t2 = (unsigned char *)s2;
-	while (i < n && (t1[i] || t2[i]))
+	iter = 0;
+	w.re = 0;
+	w.im = 0;
+	while (vnorm2(&w) <= 4 && iter++ < MAX_ITER)
 	{
-		if (t1[i] != t2[i])
-			return (t1[i] - t2[i]);
-		i++;
+		vsquare(&w);
+		vadd(&w, v);
 	}
-	return (0);
+	if (iter == MAX_ITER)
+		return (0);
+	return (iter);
 }

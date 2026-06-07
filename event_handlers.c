@@ -6,18 +6,26 @@
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 12:26:21 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/07 20:00:15 by aforcada         ###   ########.fr       */
+/*   Updated: 2026/06/07 21:26:14 by aforcada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
 
-int	on_key_close(int keycode, t_vars *vars)
+static void	free_img_vectors(t_env *env)
+{
+	free(env->img->vseed);
+	free(env->img->vmax);
+	free(env->img->vmin);
+}
+
+int	on_key_close(int keycode, t_env *env)
 {
 	if (keycode == e_escape)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
+		free_img_vectors(env);
+		mlx_destroy_window(env->mlx->mlx, env->mlx->win);
 		exit(0);
 	}
 	return (0);
@@ -33,24 +41,23 @@ int	on_roll_zoom(int wheel, int x, int y, void *env)
 	p.im = img->vmin->im + y * (img->vmax->im - img->vmin->im) / WY;
 	if (wheel == e_wheelup)
 	{
-		img->vmax->re = p.re + (img->vmax->re - p.re) / ZOOM;
-		img->vmin->re = p.re - (p.re - img->vmin->re) / ZOOM;
-		img->vmax->im = p.im + (img->vmax->im - p.im) / ZOOM;
-		img->vmin->im = p.im - (p.im - img->vmin->im) / ZOOM;
+		lerp(img->vmax, &p, 1. / ZOOM);
+		lerp(img->vmin, &p, 1. / ZOOM);
+		draw((t_env *)env);
 	}
 	if (wheel == e_wheeldown)
 	{
-		img->vmax->re = p.re + (img->vmax->re - p.re) * ZOOM;
-		img->vmin->re = p.re - (p.re - img->vmin->re) * ZOOM;
-		img->vmax->im = p.im + (img->vmax->im - p.im) * ZOOM;
-		img->vmin->im = p.im - (p.im - img->vmin->im) * ZOOM;
+		lerp(img->vmax, &p, ZOOM);
+		lerp(img->vmin, &p, ZOOM);
+		draw((t_env *)env);
 	}
-	return (draw((t_env *)env));
+	return (0);
 }
 
-int	on_destroy_close(t_vars *vars)
+int	on_destroy_close(t_env *env)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	free_img_vectors(env);
+	mlx_destroy_window(env->mlx->mlx, env->mlx->win);
 	exit(0);
 	return (0);
 }

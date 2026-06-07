@@ -6,7 +6,7 @@
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 16:04:22 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/07 16:47:56 by aforcada         ###   ########.fr       */
+/*   Updated: 2026/06/07 22:08:18 by aforcada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,29 @@ float	ft_atof(const char *s)
 		n = n * 10 + (*s++ - '0');
 	if (*s == '.')
 		n += ft_atodec(s + 1);
+	if (sign)
+		n = sign * n;
 	return (n);
+}
+
+int	ft_isfloat(const char *s)
+{
+	int		sign;
+
+	if (!s)
+		return (0);
+	while (ft_isspace(*s))
+		s++;
+	sign = ft_sign(s, 0);
+	if (sign)
+		s++;
+	while (ft_isdigit(*s))
+		s++;
+	if (*s == '.')
+		s++;
+	while (ft_isdigit(*s))
+		s++;
+	if (*s)
+		return (0);
+	return (1);
 }

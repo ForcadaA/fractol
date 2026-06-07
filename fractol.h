@@ -6,7 +6,7 @@
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 00:47:52 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/07 20:01:53 by aforcada         ###   ########.fr       */
+/*   Updated: 2026/06/07 22:46:36 by aforcada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define REAL_MAX 2.0
 # define IMAG_MIN -1.0
 # define IMAG_MAX 1.0
-# define MAX_ITER 200
+# define MAX_ITER 128
 
 # include <fcntl.h>
 # include <stdlib.h>
@@ -41,6 +41,7 @@ struct s_env
 {
 	t_vars	*mlx;
 	t_data	*img;
+	char	set;
 };
 
 struct s_data
@@ -126,7 +127,9 @@ enum e_colorcodes
 	e_red = 0x00FF0000,
 	e_green = 0x0000FF00,
 	e_blue = 0x000000FF,
+	e_cadetblue = 0x5f9ea0,
 	e_yellow = 0x00FFFF00,
+	e_lemonchiffon = 0xfffacd,
 	e_purple = 0x00FF00FF,
 	e_cyan = 0x0000FFFF,
 };
@@ -134,16 +137,29 @@ enum e_colorcodes
 //========================================================//
 //                     EVENT HANDLERS                     //
 //========================================================//
-int		on_key_close(int keycode, t_vars *vars);
-int		on_destroy_close(t_vars *vars);
+int		on_key_close(int keycode, t_env *env);
+int		on_destroy_close(t_env *env);
 int		on_roll_zoom(int wheel, int x, int y, void *env);
 // ====================================================== //
-//                     DRAW & TRANSFORMS                  //
+//                    ERROR HANDLERS                      //
+// ====================================================== //
+void	err_default(char *msg);
+void	err_init_fail(t_data *img);
+// ====================================================== //
+//                       TRANSFORMS                       //
+// ====================================================== //
+float	ft_atof(const char *s);
+int		ft_isfloat(const char *s);
+void	lerp(t_vec *v, const t_vec *w, double factor);
+double	vnorm2(const t_vec *v);
+void	vsquare(t_vec *v);
+void	vadd(t_vec *v, const t_vec *w);
+int		julia(t_vec *v, const t_vec *vseed);
+int		mandelbrot(t_vec *v);
+// ====================================================== //
+//                         DRAW                           //
 // ====================================================== //
 void	put_px(t_data *dat, int x, int y, int c);
-void	err_default(void);
-float	ft_atof(const char *s);
-int		julia(t_vec v, const t_vec *vseed);
-int		draw(t_env *env);
+void	draw(t_env *env);
 
 #endif
