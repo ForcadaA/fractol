@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-int		mandelbrot(t_vec *v)
+int	mandelbrot(t_vec *v)
 {
 	t_vec	w;
 	int		iter;
