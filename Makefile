@@ -6,7 +6,7 @@
 #    By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/16 17:59:28 by aforcada          #+#    #+#              #
-#    Updated: 2026/06/07 16:47:14 by aforcada         ###   ########.fr        #
+#    Updated: 2026/06/07 19:08:28 by aforcada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SOURCES = \
 	event_handlers.c\
 	ft_atof.c\
 	put_px.c\
+	draw.c\
 	transforms.c\
 	fractol.c\
 

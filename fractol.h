@@ -6,7 +6,7 @@
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 00:47:52 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/07 18:02:05 by aforcada         ###   ########.fr       */
+/*   Updated: 2026/06/07 20:01:53 by aforcada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define REAL_MAX 2.0
 # define IMAG_MIN -1.0
 # define IMAG_MAX 1.0
-# define MAX_ITER 63
+# define MAX_ITER 200
 
 # include <fcntl.h>
 # include <stdlib.h>
@@ -39,11 +39,9 @@ typedef struct s_pos	t_pos;
 
 struct s_env
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
+	t_vars	*mlx;
+	t_data	*img;
 };
-
 
 struct s_data
 {
@@ -138,6 +136,7 @@ enum e_colorcodes
 //========================================================//
 int		on_key_close(int keycode, t_vars *vars);
 int		on_destroy_close(t_vars *vars);
+int		on_roll_zoom(int wheel, int x, int y, void *env);
 // ====================================================== //
 //                     DRAW & TRANSFORMS                  //
 // ====================================================== //
@@ -145,5 +144,6 @@ void	put_px(t_data *dat, int x, int y, int c);
 void	err_default(void);
 float	ft_atof(const char *s);
 int		julia(t_vec v, const t_vec *vseed);
+int		draw(t_env *env);
 
 #endif
