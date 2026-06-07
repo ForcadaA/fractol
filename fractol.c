@@ -14,24 +14,17 @@
 
 void	check_input(int ac, char *av[])
 {
-	if (!(ac == 2 || ac == 4))
+	if (ac == 2 && (av[1])[0] == 'm' && ft_strlen(av[1]) == 1)
 	{
-		err_default(" Use: ./fractol <j/m> [j:<re> <im>]");
+		return ;
 	}
-	else
+	if (ac == 4 && (av[1])[0] == 'j' && ft_strlen(av[1]) == 1
+		&& ft_isfloat(av[2])
+		&& ft_isfloat(av[3]))
 	{
-		if (ac == 2 && av[1][0] == 'm' && ft_strlen(av[1]) == 1)
-		{
-			return ;
-		}
-		if (ac == 4 && av[1][0] == 'j' && ft_strlen(av[1]) == 1
-			&& ft_isfloat(av[2])
-			&& ft_isfloat(av[3]))
-		{
-			return ;
-		}
-		err_default(" Use: ./fractol <j/m> [j:<re> <im>]");
+		return ;
 	}
+	err_default(" Use: ./fractol <j/m> [j:<re> <im>]");
 }
 
 void	init_img(t_data *img, int ac, char *av[])

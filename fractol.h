@@ -14,8 +14,8 @@
 # define FRACTOL_H
 
 # define _XOPEN_SOURCE 500
-# define WX 1500
-# define WY 900
+# define WX 1000
+# define WY 618
 # define ZOOM 3.5
 # define REAL_MIN -2.0
 # define REAL_MAX 2.0
