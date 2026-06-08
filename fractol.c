@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                           :+:    :+:           */
+/*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 09:37:45 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/08 10:07:04 by aforcada       ########   odam.nl        */
+/*   Updated: 2026/06/08 11:48:06 by aforcada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@ void	check_input(int ac, char *av[])
 	{
 		return ;
 	}
+	if (ac == 2 && (av[1])[0] == 'd' && ft_strlen(av[1]) == 1)
+	{
+		return ;
+	}
 	if (ac == 4 && (av[1])[0] == 'j' && ft_strlen(av[1]) == 1
 		&& ft_isfloat(av[2])
 		&& ft_isfloat(av[3]))
 	{
 		return ;
 	}
-	err_default(" Use: ./fractol <j/m> [j:<re> <im>]");
+	err_default(" Use: ./fractol <d/j/m> [j:<re> <im>]");
 }
 
 void	init_img(t_data *img, int ac, char *av[])

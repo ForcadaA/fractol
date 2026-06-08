@@ -6,7 +6,7 @@
 #    By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/16 17:59:28 by aforcada          #+#    #+#              #
-#    Updated: 2026/06/07 21:31:16 by aforcada         ###   ########.fr        #
+#    Updated: 2026/06/08 11:44:05 by aforcada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SOURCES = \
 	transforms.c\
 	julia.c\
 	mandelbrot.c\
+	douaby.c\
 	fractol.c\
 
 OBJECTS = $(SOURCES:%.c=%.o)

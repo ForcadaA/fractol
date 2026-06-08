@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                           :+:    :+:           */
+/*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 00:47:52 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/08 10:02:39 by aforcada       ########   odam.nl        */
+/*   Updated: 2026/06/08 11:43:49 by aforcada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ enum e_keycodes
 
 enum e_colorcodes
 {
+	e_white = 0x00FFFFFF,
 	e_red = 0x00FF0000,
 	e_green = 0x0000FF00,
 	e_blue = 0x000000FF,
@@ -153,8 +154,12 @@ void	lerp(t_vec *v, const t_vec *w, double factor);
 double	vnorm2(const t_vec *v);
 void	vsquare(t_vec *v);
 void	vadd(t_vec *v, const t_vec *w);
+// ====================================================== //
+//                         SETS                           //
+// ====================================================== //
 int		julia(t_vec *v, const t_vec *vseed);
 int		mandelbrot(t_vec *v);
+int		douaby(t_vec *v);
 // ====================================================== //
 //                         DRAW                           //
 // ====================================================== //
