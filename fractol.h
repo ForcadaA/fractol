@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol.h                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 00:47:52 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/07 22:46:36 by aforcada         ###   ########.fr       */
+/*   Updated: 2026/06/08 10:02:39 by aforcada       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # define _XOPEN_SOURCE 500
 # define WX 1000
-# define WY 618
+# define WY 1000
 # define ZOOM 3.5
 # define REAL_MIN -2.0
 # define REAL_MAX 2.0
 # define IMAG_MIN -1.0
 # define IMAG_MAX 1.0
-# define MAX_ITER 128
+# define MAX_ITER 256
 
 # include <fcntl.h>
 # include <stdlib.h>
@@ -30,18 +30,22 @@
 # include "./libft/libft.h"
 # include "./mlx/mlx.h"
 
+typedef struct s_pos	t_pos;
+typedef struct s_vec	t_vec;
 typedef struct s_data	t_data;
 typedef struct s_vars	t_vars;
 typedef struct s_env	t_env;
-typedef unsigned int	t_uint;
-typedef struct s_vec	t_vec;
-typedef struct s_pos	t_pos;
 
-struct s_env
+struct s_vec
 {
-	t_vars	*mlx;
-	t_data	*img;
-	char	set;
+	double	re;
+	double	im;
+};
+
+struct s_pos
+{
+	int	x;
+	int	y;
 };
 
 struct s_data
@@ -62,16 +66,11 @@ struct s_vars
 	void	*win;
 };
 
-struct s_vec
+struct s_env
 {
-	double	re;
-	double	im;
-};
-
-struct s_pos
-{
-	int	x;
-	int	y;
+	t_vars	mlx;
+	t_data	img;
+	char	set;
 };
 
 enum e_event_hooks

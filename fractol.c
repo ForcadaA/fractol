@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   fractol.c                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aforcada <aforcada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 09:37:45 by aforcada          #+#    #+#             */
-/*   Updated: 2026/06/07 23:02:39 by aforcada         ###   ########.fr       */
+/*   Updated: 2026/06/08 10:07:04 by aforcada       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,10 @@ void	init_img(t_data *img, int ac, char *av[])
 
 void	init_env(t_env *env, int ac, char *av[])
 {
-	static t_vars	vars;
-	static t_data	img;
-
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, WX, WY, "Fractol");
-	img.img = mlx_new_image(vars.mlx, WX, WY);
-	init_img(&img, ac, av);
-	env->img = &img;
-	env->mlx = &vars;
+	env->mlx.mlx = mlx_init();
+	env->mlx.win = mlx_new_window(env->mlx.mlx, WX, WY, "Fractol");
+	env->img.img = mlx_new_image(env->mlx.mlx, WX, WY);
+	init_img(&env->img, ac, av);
 	env->set = *(av[1]);
 }
 
@@ -68,11 +63,11 @@ int	main(int ac, char *av[])
 	check_input(ac, av);
 	init_env(&env, ac, av);
 	draw(&env);
-	mlx_mouse_hook(env.mlx->win, on_roll_zoom, &env);
-	mlx_hook(env.mlx->win, e_on_keydown,
+	mlx_mouse_hook(env.mlx.win, on_roll_zoom, &env);
+	mlx_hook(env.mlx.win, e_on_keydown,
 		e_key_press_mask, on_key_close, &env);
-	mlx_hook(env.mlx->win, e_on_destroy,
+	mlx_hook(env.mlx.win, e_on_destroy,
 		e_no_event_mask, on_destroy_close, &env);
-	mlx_loop(env.mlx->mlx);
+	mlx_loop(env.mlx.mlx);
 	return (0);
 }
